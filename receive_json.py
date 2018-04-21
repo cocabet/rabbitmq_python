@@ -3,9 +3,6 @@ import json
 
 print(sys.argv[1])
 
-#credentials = pika.PlainCredentials(sys.argv[2], sys.argv[3])
-#connection = pika.BlockingConnection(pika.ConnectionParameters(host=sys.argv[1],
-#															   credentials = credentials))
 connection = pika.BlockingConnection(pika.ConnectionParameters(host=sys.argv[1]))
 channel = connection.channel()
 
