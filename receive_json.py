@@ -1,5 +1,6 @@
 import sys, pika
 import json
+import base64
 
 print(sys.argv[1])
 
@@ -9,8 +10,12 @@ channel = connection.channel()
 channel.queue_declare(queue='hello_json')
 
 def callback(ch, method, properties, body):
-	decoded = json.loads(body)
-	print(decoded)
+	#decoded = json.loads(body)
+	#print(decoded)
+	image_64_decode = base64.decodestring(body) 
+	image_result = open('images_decode.jpg', 'wb') # create a writable image and write the decoding result
+	image_result.write(image_64_decode)
+	print(image_64_decode)
 
 channel.basic_consume(callback,
 	                   queue='hello_json',
